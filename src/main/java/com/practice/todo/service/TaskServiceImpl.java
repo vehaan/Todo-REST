@@ -1,12 +1,14 @@
 package com.practice.todo.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.practice.todo.entity.Task;
+import com.practice.todo.exception.IdNotFoundException;
 import com.practice.todo.repo.ITaskRepository;
 
 @Service
@@ -38,12 +40,15 @@ public class TaskServiceImpl implements ITaskService {
 
 	@Override
 	public Task getTask(int id) {
-		return taskRepo.getById(id);
+		Optional<Task> optionalTask =  taskRepo.findById(id);
+		return optionalTask.orElseThrow(() -> new IdNotFoundException("Task with given id doesn't exist!"));
 	}
 
 	@Override
-	public List<Task> getAllTask() {
+	public List<Task> getAllTask() throws Exception {
 		List<Task> tasks = taskRepo.findAll();
+		if (tasks.size() == 0)
+			throw new Exception("Relax, You have nothing todo :)");
 		return tasks;
 	}
 

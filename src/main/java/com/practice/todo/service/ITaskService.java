@@ -10,6 +10,6 @@ public interface ITaskService {
 	Task deleteTask(int id);
 	Task updateTask(Task task);
 	Task getTask(int id);
-	List<Task> getAllTask();
+	List<Task> getAllTask() throws Exception;
 
 }

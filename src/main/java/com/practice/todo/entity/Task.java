@@ -5,6 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
@@ -17,16 +20,18 @@ public class Task {
 	private int id;
 	
 	@Column(name = "message")
+	@NotBlank(message="The message can not be Empty!")
 	private String message;
 	
 	public Task() {
 		
 	}
 
-	public Task(String message) {
-		super();
+	public Task(@NotBlank(message = "The message can not be Empty!") String message) {
 		this.message = message;
 	}
+
+
 
 	public int getId() {
 		return id;

@@ -2,6 +2,8 @@ package com.practice.todo.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,13 +26,13 @@ public class TaskController {
 	TaskServiceImpl taskService;
 	
 	@PostMapping("/tasks")
-	public ResponseEntity<Task> addTask(@RequestBody Task task){
+	public ResponseEntity<Task> addTask(@Valid @RequestBody Task task){
 		Task newTask = taskService.addTask(task);
 		return new ResponseEntity<Task>(newTask,HttpStatus.OK);
 	}
 	
 	@RequestMapping("/tasks")
-	public ResponseEntity<List<Task>> allTask(){
+	public ResponseEntity<List<Task>> allTask() throws Exception{
 		List<Task> tasks = taskService.getAllTask();
 		return new ResponseEntity<List<Task>>(tasks,HttpStatus.OK);
 	}
@@ -42,7 +44,7 @@ public class TaskController {
 	}
 	
 	@PutMapping("/tasks")
-	public ResponseEntity<Task> updateTask(@RequestBody Task task){
+	public ResponseEntity<Task> updateTask(@Valid @RequestBody Task task){
 		Task updatedTask = taskService.updateTask(task);
 		return new ResponseEntity<Task>(updatedTask,HttpStatus.OK);
 	}
