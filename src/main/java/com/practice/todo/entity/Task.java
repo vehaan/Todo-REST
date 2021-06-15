@@ -30,8 +30,12 @@ public class Task {
 	public Task(@NotBlank(message = "The message can not be Empty!") String message) {
 		this.message = message;
 	}
-
-
+	
+	public Task(int id, @NotBlank(message = "The message can not be Empty!") String message) {
+		super();
+		this.id = id;
+		this.message = message;
+	}
 
 	public int getId() {
 		return id;
