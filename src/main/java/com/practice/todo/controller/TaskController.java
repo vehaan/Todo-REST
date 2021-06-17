@@ -23,6 +23,11 @@ public class TaskController {
 	@Autowired
 	TaskServiceImpl taskService;
 	
+	@GetMapping("/")
+	public ResponseEntity<String> welcome() throws Exception{
+		return new ResponseEntity<String>("Welcome to the HomePage",HttpStatus.OK);
+	}
+	
 	@PostMapping("/tasks")
 	public ResponseEntity<Task> addTask(@Valid @RequestBody Task task){
 		Task newTask = taskService.addTask(task);
